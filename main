@@ -1,0 +1,114 @@
+import java.util.*;
+
+public class Main {
+
+	public static Scanner in1 = new Scanner(System.in);
+	public static Scanner in2 = new Scanner(System.in);
+
+	public  static ArrayList<User> users  = new ArrayList<>(); // save the users which enter to the application in it
+	
+	
+	public static void main(String[] args) {
+		int choice;
+		int type;
+		System.out.println("GOFO APP");		
+		
+		while (true) {
+		
+			System.out.println("1. SIGNUP" + "\n" + "2. LOGIN"+"\n" + "3. display playgrounds" );
+			System.out.println("Enter Your Choice");
+			choice = in1.nextInt();
+		
+			if (choice == 1) {  // choice to sign up
+				System.out.println("1. player" + "\n" + "2. owner" + "\n" + "3. admin");
+				System.out.println("Enter Your Choice");
+				type = in1.nextInt();
+				
+				if (type == 1) {  // signup as player
+					Player p1 = new Player(1, "walaa", "123", "walaa@", "giza", "3569","player");
+				    if(p1.signUp("walaa@",users)) {  // return false if email already exist
+				    	System.out.println("----------sigup sucess-------- "); 
+				       	users.add(p1);   
+				    } 
+				}
+				
+				if (type == 2) { // signup as owner
+					PlaygroundOwner o1 = new PlaygroundOwner(1, "Ahmed", "123", "Ahmed@", "giza", "3569","owner");
+					 if(o1.signUp("Ahmed@",users)) { // return false if email already exist
+						 System.out.println("----------sigup sucess-------- ");
+						 users.add(o1);
+					 } 
+				     
+				}
+				
+				if (type == 3) { // signup as admin
+					PlaygroundOwner admin1 = new PlaygroundOwner(1, "hany", "123", "hany@", "giza", "3569","owner");
+					 if(admin1.signUp("hany@",users)) { // return false if email already exist
+						 System.out.println("----------sigup sucess-------- ");
+						 users.add(admin1);
+					 } 
+				}
+				
+				
+			}
+			else if (choice == 2) {  // if user want to login
+				System.out.println("1. player" + "\n" + "2. owner" + "\n" + "3. admin");
+				System.out.println("Enter Your Choice");
+				type = in1.nextInt();
+				
+				if (type == 1) { // login as player
+					Player p1 = new Player();
+					
+				    if(p1.login("walaa@","123",users)) {  // enter in this condition if the passward and email is right
+				    	System.out.println("----------login sucess-------- "); 
+				    	 
+				    	System.out.println(" Feature you can do  ");
+				    	System.out.println(" 1. Book playground  ");
+				    	
+				    	p1.bookPlayground("cairo",2);  // enter the location and the avaliable hour of playground which you want
+				    	
+//				    	p1.bookPlayground("cairo",2);    // wrong information to test the function
+//				    	p1.bookPlayground("giza",5);     // wrong information to test the function
+				    }
+				    
+			    }
+				
+				if (type == 2) { // login as Owner
+					PlaygroundOwner o1 = new PlaygroundOwner();
+					
+					if(o1.login("Ahmed@","123",users)) { // enter in this condition if the passward and email is right
+						System.out.println("----------login sucess-------- "); 
+				    	 
+				    	System.out.println(" Feature you can do  ");
+				    	System.out.println(" 1. Register to add playground  ");
+				    	
+				    	 // enter name, location, size , avaliableHour,price,canelationPeriod,false-->still not booked
+				    	o1.requestRegisterPlayground("P1","cairo",4,2,20,1,false);  
+				    	o1.requestRegisterPlayground("P2","giza",5,3,10,2,false);
+				    	
+				    }	    
+			    }
+				
+				if (type == 3) { // login as admin
+					Admin o1 = new Admin();
+					
+					if(o1.login("hany@","123",users)) { // enter in this condition if the passward and email is right
+						System.out.println("----------login sucess-------- "); 
+				    }	    
+			    }
+				
+			}
+			
+			else if(choice==3) {  // display the playgrounds
+				User u=new User();
+				u.Displayplaygrounds();
+			}
+			else {  // leave
+				System.out.println("----------- thanks ------------");
+				break;
+			}
+			
+						
+		}
+	}
+}
